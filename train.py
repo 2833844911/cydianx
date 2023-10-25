@@ -10,7 +10,9 @@ os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
 # 将模型移动到GPU上（如果有可用的话）
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+# 图片划分为5x3去识别
 needJj = [5,3]
+# 图片压缩为的大小
 tpxz = ( 192,320)
 
 def euclidean_distance(p1, p2):
