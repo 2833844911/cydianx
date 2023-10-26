@@ -238,7 +238,8 @@ class mubModu(nn.Module):
         d2 = self.ks(x)
         d2 = d2.permute(0, 2, 3, 1)
         d2 = d2.reshape((d2.shape[0], d2.shape[1], d2.shape[2], 1, 5))
-        return d2
+        out = d2.squeeze(0)
+        return out
 
 
 class mbLoss(nn.Module):
