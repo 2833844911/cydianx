@@ -9,6 +9,17 @@ tpxz = ( 192,320) # 需要注意防止失真
 ```
 
 
+可切换分类模型 (zzd.py中)
+```python
+    def shibie(self,imgpa):
+        tp, imge = self.getimage(imgpa)
+        d = time.time()
+        kuane = self.mymodo.run(None, {self.mymodo.get_inputs()[0].name: tp})
+        kuan = self.hetInfo(kuane) # 获得框的信息 去剪切物体
+        # 下面可以不要了 然后换你的模型去识别物体
+
+```
+
 运行 train.py
 
 运行 flmox.py
