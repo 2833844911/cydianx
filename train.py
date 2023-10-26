@@ -204,35 +204,37 @@ class getData(Dataset):
 
 
 
+
 class mubModu(nn.Module):
     def __init__(self):
         super(mubModu, self).__init__()
         self.ks = nn.Sequential(
             nn.Conv2d(in_channels=3, out_channels=32, kernel_size=(3, 3), padding=1),
-            nn.ReLU(inplace=True),
+            nn.LeakyReLU(inplace=True),
             nn.MaxPool2d(kernel_size=2, stride=2),
             nn.Conv2d(in_channels=32, out_channels=96, kernel_size=(3, 3), padding=1),
-            nn.ReLU(inplace=True),
+            nn.LeakyReLU(inplace=True),
             nn.MaxPool2d(kernel_size=2, stride=2),
             nn.Conv2d(in_channels=96, out_channels=128, kernel_size=(3, 3), padding=1),
-            nn.ReLU(inplace=True),
+            nn.LeakyReLU(inplace=True),
             nn.MaxPool2d(kernel_size=2, stride=2),
-            nn.Conv2d(in_channels=128, out_channels=64, kernel_size=(3, 3), padding=1),
-            nn.ReLU(inplace=True),
+            nn.Conv2d(in_channels=128, out_channels=128, kernel_size=(3, 3), padding=1),
+            nn.LeakyReLU(inplace=True),
             nn.MaxPool2d(kernel_size=2, stride=2),
-            nn.Conv2d(in_channels=64, out_channels=128, kernel_size=(3, 3), padding=1),
-            nn.ReLU(inplace=True),
+            nn.Conv2d(in_channels=128, out_channels=128, kernel_size=(3, 3), padding=1),
+            nn.LeakyReLU(inplace=True),
             nn.MaxPool2d(kernel_size=2, stride=2),
             nn.Conv2d(in_channels=128, out_channels=128, kernel_size=(1, 1)),
-            nn.ReLU(inplace=True),
+            nn.LeakyReLU(inplace=True),
             nn.MaxPool2d(kernel_size=2, stride=2),
-            nn.Conv2d(in_channels=128, out_channels=256, kernel_size=(3, 3), padding=1),
-            nn.ReLU(inplace=True),
-            nn.Conv2d(in_channels=256, out_channels=150, kernel_size=(3, 3), padding=1),
-            nn.ReLU(inplace=True),
-            nn.Conv2d(in_channels=150, out_channels=5, kernel_size=(3, 3), padding=1),
+            nn.Conv2d(in_channels=128, out_channels=64, kernel_size=(3, 3), padding=1),
+            nn.LeakyReLU(inplace=True),
+            nn.Conv2d(in_channels=64, out_channels=32, kernel_size=(3, 3), padding=1),
+            nn.LeakyReLU(inplace=True),
+            nn.Conv2d(in_channels=32, out_channels=5, kernel_size=(3, 3), padding=1),
             nn.Sigmoid(),
         )
+
 
     def forward(self, x):
         d2 = self.ks(x)
@@ -240,6 +242,7 @@ class mubModu(nn.Module):
         d2 = d2.reshape((d2.shape[0], d2.shape[1], d2.shape[2], 1, 5))
         out = d2.squeeze(0)
         return out
+
 
 
 class mbLoss(nn.Module):
