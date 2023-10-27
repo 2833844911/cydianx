@@ -67,23 +67,29 @@ class flmodo(nn.Module):
         x =self.sgm (x )
         return x
 
+try:
+    mymodo = torch.load('./mox2.pth', map_location=device)
+    mymodo.to(device)
+    mymodo.eval()
 
-mymodo = torch.load('./mox2.pth', map_location=device)
-mymodo.to(device)
-mymodo.eval()
+    input_names = ['input']
+    output_names = ['output']
 
-input_names = ['input']
-output_names = ['output']
+    x = torch.randn(1, 3, 320, 192).to(device)
 
-x = torch.randn(1, 3, 320, 192).to(device)
-
-torch.onnx.export(mymodo, x, 'sbkuan.onnx', input_names=input_names, output_names=output_names, verbose='True')
-
-mymod = torch.load('./flei3.pth',map_location=device)
-mymod.eval()
-x = torch.randn(1, 3, 80, 80).to(device)
-input_names = ['input']
-output_names = ['output']
-torch.onnx.export(mymod, x, 'flei.onnx', input_names=input_names, output_names=output_names, verbose='True')
+    torch.onnx.export(mymodo, x, 'sbkuan.onnx', input_names=input_names, output_names=output_names, verbose='True')
+    print("成功把画框模型转onnx")
+except:
+    pass
+try:
+    mymod = torch.load('./flei3.pth',map_location=device)
+    mymod.eval()
+    x = torch.randn(1, 3, 80, 80).to(device)
+    input_names = ['input']
+    output_names = ['output']
+    torch.onnx.export(mymod, x, 'flei.onnx', input_names=input_names, output_names=output_names, verbose='True')
+    print("成功把分类模型转onnx")
+except:
+    pass
 
 
