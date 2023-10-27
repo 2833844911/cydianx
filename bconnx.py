@@ -4,8 +4,13 @@
 import torchvision.models as models
 import torch
 from torch import nn
-
-device = torch.device("cpu" if torch.cuda.is_available() else "cpu")
+if torch.cuda.is_available():
+    if input("检测到可转gpu运行是否转(y/n):").strip():
+        device = torch.device("cuda")
+    else:
+        device = torch.device("cpu")
+else:
+    device = torch.device("cpu")
 
 with open('./classes.txt',encoding='utf-8') as f:
     t = f.read().split('\n')
@@ -70,13 +75,13 @@ mymodo.eval()
 input_names = ['input']
 output_names = ['output']
 
-x = torch.randn(1, 3, 320, 192)
+x = torch.randn(1, 3, 320, 192).to(device)
 
 torch.onnx.export(mymodo, x, 'sbkuan.onnx', input_names=input_names, output_names=output_names, verbose='True')
 
 mymod = torch.load('./flei3.pth',map_location=device)
 mymod.eval()
-x = torch.randn(1, 3, 80, 80)
+x = torch.randn(1, 3, 80, 80).to(device)
 input_names = ['input']
 output_names = ['output']
 torch.onnx.export(mymod, x, 'flei.onnx', input_names=input_names, output_names=output_names, verbose='True')
