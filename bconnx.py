@@ -5,7 +5,7 @@ import torchvision.models as models
 import torch
 from torch import nn
 if torch.cuda.is_available():
-    if input("检测到可转gpu运行是否转(y/n):").strip():
+    if input("检测到可转gpu运行是否转(y/n):").strip() == 'y':
         device = torch.device("cuda")
     else:
         device = torch.device("cpu")
