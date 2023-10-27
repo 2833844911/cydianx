@@ -128,7 +128,7 @@ class getData(Dataset):
         self.data = []
         path = './labels'
         for i in os.listdir(path):
-            self.data.append(['./images/'+i.split('.')[0]+'.png', path+'/'+i])
+            self.data.append(['./images/'+i.split('.')[0]+'.jpg', path+'/'+i])
         self.jk = len(self.data)
         self.tpcl = transforms.Compose([
             transforms.Resize(tpxz),
