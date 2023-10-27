@@ -22,7 +22,7 @@ tpxz = ( 192,320) # 需要注意防止失真
 ```
 
 
-可切换分类模型 (zzd.py中)
+可切换分类模型 (zzd.py 或者 huak.py中)
 ```python
     def shibie(self,imgpa):
         tp, imge = self.getimage(imgpa)
@@ -40,7 +40,9 @@ tpxz = ( 192,320) # 需要注意防止失真
 运行 bconnx.py 把pth转onnx
 
 
-测试 运行zzd.py
+测试 运行zzd.py 画框并分类
+
+测试 运行huak.py 只画框 然后自己可以结合框的信息去裁剪出框，然后分类框里面是什么
 
 
 视频教程地址:https://www.bilibili.com/video/BV1o84y197c8/?vd_source=93dc7417d09246b7259569c65e2eb085
