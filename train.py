@@ -316,7 +316,7 @@ for i in range(100):
     cs = 0
     csl = 0
     zxdss = 0
-    datae = DataLoader(data, shuffle=True, batch_size=5)
+    datae = DataLoader(data, shuffle=True, batch_size=30)
 
     datad = tqdm(datae)
     for img,tar in datad:
