@@ -128,7 +128,7 @@ class getData(Dataset):
         self.data = []
         path = './labels'
         for i in os.listdir(path):
-            self.data.append(['./images/'+i.split('.')[0]+'.jpg', path+'/'+i])
+            self.data.append(['./images/'+i.split('.')[0]+'.png', path+'/'+i])
         self.jk = len(self.data)
         self.tpcl = transforms.Compose([
             transforms.Resize(tpxz),
@@ -212,24 +212,21 @@ class mubModu(nn.Module):
             nn.Conv2d(in_channels=3, out_channels=32, kernel_size=(3, 3), padding=1),
             nn.LeakyReLU(inplace=True),
             nn.MaxPool2d(kernel_size=2, stride=2),
-            nn.Conv2d(in_channels=32, out_channels=96, kernel_size=(3, 3), padding=1),
+            nn.Conv2d(in_channels=32, out_channels=64, kernel_size=(3, 3), padding=1),
             nn.LeakyReLU(inplace=True),
             nn.MaxPool2d(kernel_size=2, stride=2),
-            nn.Conv2d(in_channels=96, out_channels=128, kernel_size=(3, 3), padding=1),
+            nn.Conv2d(in_channels=64, out_channels=96, kernel_size=(3, 3), padding=1),
             nn.LeakyReLU(inplace=True),
             nn.MaxPool2d(kernel_size=2, stride=2),
-            nn.Conv2d(in_channels=128, out_channels=128, kernel_size=(3, 3), padding=1),
+            nn.Conv2d(in_channels=96, out_channels=96, kernel_size=(3, 3), padding=1),
             nn.LeakyReLU(inplace=True),
             nn.MaxPool2d(kernel_size=2, stride=2),
-            nn.Conv2d(in_channels=128, out_channels=128, kernel_size=(3, 3), padding=1),
+            nn.Conv2d(in_channels=96, out_channels=64, kernel_size=(3, 3), padding=1),
             nn.LeakyReLU(inplace=True),
             nn.MaxPool2d(kernel_size=2, stride=2),
-            nn.Conv2d(in_channels=128, out_channels=128, kernel_size=(1, 1)),
+            nn.Conv2d(in_channels=64, out_channels=32, kernel_size=(1, 1)),
             nn.LeakyReLU(inplace=True),
             nn.MaxPool2d(kernel_size=2, stride=2),
-            nn.Conv2d(in_channels=128, out_channels=64, kernel_size=(3, 3), padding=1),
-            nn.LeakyReLU(inplace=True),
-            nn.Conv2d(in_channels=64, out_channels=32, kernel_size=(3, 3), padding=1),
             nn.LeakyReLU(inplace=True),
             nn.Conv2d(in_channels=32, out_channels=5, kernel_size=(3, 3), padding=1),
             nn.Sigmoid(),
@@ -319,7 +316,7 @@ for i in range(100):
     cs = 0
     csl = 0
     zxdss = 0
-    datae = DataLoader(data, shuffle=True, batch_size=32)
+    datae = DataLoader(data, shuffle=True, batch_size=5)
 
     datad = tqdm(datae)
     for img,tar in datad:
