@@ -35,12 +35,7 @@ tpxz = ( 192,320) # 需要注意防止失真
 
 运行 train.py
 
-运行 flmox.py
-
 运行 bconnx.py 把pth转onnx
-
-
-测试 运行zzd.py 画框并分类
 
 测试 运行huak.py 只画框 然后自己可以结合框的信息去裁剪出框，然后分类框里面是什么
 
