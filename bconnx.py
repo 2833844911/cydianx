@@ -57,20 +57,6 @@ class mubModu(nn.Module):
 
 
 
-class flmodo(nn.Module):
-
-    def __init__(self):
-        super(flmodo, self).__init__()
-        self.ret = models.resnet18(pretrained=False)
-        # del self.ret.sgm
-        self.ret.fc = nn.Linear(512, alllb)
-        self.sgm = nn.Sigmoid()
-
-    def forward(self,x):
-        x = self.ret(x)
-        x =self.sgm (x )
-        return x
-
 try:
     mymodo = torch.load('./mox2.pth', map_location=device)
     mymodo.to(device)
@@ -85,15 +71,6 @@ try:
     print("成功把画框模型转onnx")
 except:
     pass
-try:
-    mymod = torch.load('./flei3.pth',map_location=device)
-    mymod.eval()
-    x = torch.randn(1, 3, 80, 80).to(device)
-    input_names = ['input']
-    output_names = ['output']
-    torch.onnx.export(mymod, x, 'flei.onnx', input_names=input_names, output_names=output_names, verbose='True')
-    print("成功把分类模型转onnx")
-except:
-    pass
+
 
 
